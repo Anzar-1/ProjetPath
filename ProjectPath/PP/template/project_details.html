@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{%block content%}
+    <h1>{{p.nom_projet}}</h1>
+    <ul>
+        <li>{{p.description}}</li>
+        <li>{{p.participants}}</li>
+        <li>{{p.file_path}}</li>
+    </ul>
+{%endblock%}

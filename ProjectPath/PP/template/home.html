@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Bonjour</h1>
+    <h2>{{user.nom}}</h2>
+    <ul>
+        {%for p in user_projects%}
+            <li><a href = "{%url 'project_details' p.id%}" >{{p.nom_projet}}</a></li>
+        {%endfor%}
+    </ul>
+
+{%endblock%}
