@@ -1,16 +1,23 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from PP.models import projet
+<<<<<<< HEAD
 #from PP.models import buisness
 from PP.models import CompteEtudiant
 from PP.form import CreateProject
 #from PP.form import AskBuisness
 from PP.form import CreateAccount
+=======
+from PP.models import buisness
+from PP.form import CreateProject
+from PP.form import AskBuisness
+>>>>>>> 722ffde8fe751ef6ad6f4478fa46d35e5a0d0d31
 
 def project_list(request):
     P = projet.objects.all()
     return render(request, 'project_list.html',{'p':P})
 
+<<<<<<< HEAD
 #def buisness_list(request):
 #    B = buisness.objects.all()
 #    return render(request,'buisness_list.html',{'b': B})
@@ -18,6 +25,15 @@ def project_list(request):
 def add_project(request):
     if request.method =="POST":
         form = CreateProject(request.POST, request.FILES)
+=======
+def buisness_list(request):
+    B = buisness.objects.all()
+    return render(request,'buisness_list.html',{'b': B})
+
+def add_project(request):
+    if request.method =="POST":
+        form = CreateProject(request.POST)
+>>>>>>> 722ffde8fe751ef6ad6f4478fa46d35e5a0d0d31
         if form.is_valid():
             form.save()
             return redirect("project_list")
@@ -25,7 +41,11 @@ def add_project(request):
         form = CreateProject()
     return render(request, "add_project.html", {'form' : form})
 
+<<<<<<< HEAD
 #def add_ask_buisness(request):
+=======
+def add_ask_buisness(request):
+>>>>>>> 722ffde8fe751ef6ad6f4478fa46d35e5a0d0d31
     if request.method == 'POST':
         form = AskBuisness(request.POST)
         if form.is_valid():
@@ -36,6 +56,7 @@ def add_project(request):
     return render(request, "add_buisness.html", {"form": form})
 
 def confirmation(request):
+<<<<<<< HEAD
     return render(request, "confirmation.html")
 
 def create_acount(request):
@@ -56,3 +77,6 @@ def home(request,user_id):
 def project_details(request, project_id):
     project =  projet.objects.get(id = project_id)
     return render(request, "project_details.html", {"p" : project})
+=======
+    return render(request, "confirmation.html")
+>>>>>>> 722ffde8fe751ef6ad6f4478fa46d35e5a0d0d31
