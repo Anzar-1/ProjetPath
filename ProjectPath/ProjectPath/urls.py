@@ -16,28 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-<<<<<<< HEAD
 from django.conf import settings
 from django.conf.urls.static import static
-=======
->>>>>>> 722ffde8fe751ef6ad6f4478fa46d35e5a0d0d31
 from PP import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('project_list/', views.project_list, name = "project_list"),
     path('add_project/', views.add_project, name = "add_project"),
-<<<<<<< HEAD
+    path("project_details/<int:project_id>", views.project_details, name="project_details"),
+    path("project_details/update/<int:project_id>", views.modify_project, name="modify_Project"),
     #path('buisness_list/', views.buisness_list, name = "buisness_list"),
     #path('add_buisness/', views.add_ask_buisness, name="add_buisness"),
     path("confirmation/", views.confirmation, name="confirmation"),
     path("create_account/", views.create_acount, name="create_account"),
     path("home/<int:user_id>", views.home, name= "home"),
-    path("project_details/<int:project_id>", views.project_details, name="project_details")
+ 
 ]+static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
-=======
-    path('buisness_list/', views.buisness_list, name = "buisness_list"),
-    path('add_buisness/', views.add_ask_buisness, name="add_buisness"),
-    path("confirmation/", views.confirmation, name="confirmation"),
-]
->>>>>>> 722ffde8fe751ef6ad6f4478fa46d35e5a0d0d31
