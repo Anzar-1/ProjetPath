@@ -30,6 +30,9 @@ urlpatterns = [
     #path('add_buisness/', views.add_ask_buisness, name="add_buisness"),
     path("confirmation/", views.confirmation, name="confirmation"),
     path("create_account/", views.create_acount, name="create_account"),
+    path("user/<int:user_id>", views.user_details, name="user_details"),
+    path("user/update/<int:user_id>", views.modify_user_account, name = "modify_user_account"),
     path("home/<int:user_id>", views.home, name= "home"),
+    path("authentification/", views.user_authentification, name = "authentification"),
  
 ]+static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

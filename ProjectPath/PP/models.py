@@ -1,26 +1,35 @@
 from django.db import models
 
-#class buisness(models.Model):
- #   nom_projet = models.fields.CharField(max_length=100)
- #   adresse_siege_social = models.fields.CharField(max_length = 200)
- #   class form_juridique(models.Choices):
- #       SARL= "SARL"
- #       EURL = "EURL"
- #   formeJuridique = models.fields.CharField(choices=form_juridique.choices)
- #   activite = models.fields.CharField(max_length=200)
- #   numero_registre_commerce = models.fields.IntegerField()
- #   #copie_registre_commerce = models.fields.FilePathField()
- #   numero_identification_fiscale = models.fields.IntegerField()
-
-#    description = models.fields.CharField(max_length=1000)
-
 class CompteEtudiant(models.Model):
+    matricule = models.fields.IntegerField()
     nom = models.fields.CharField(max_length = 100)
     prenom = models.fields.CharField(max_length = 100)
-    #ça serait bien d'en faire une clé primaire. Aussi il y a une migration qui est pas appliquée ici oublie pas.
     mot_de_passe = models.fields.CharField( max_length = 100 ) #Y a surement un moyen de la rendre invisible au formulaire, jsp si c'est mon boulot pour l'instant.
     adresse_mail = models.fields.EmailField()
     telephone = models.fields.IntegerField()
+
+    def get_fields(self):
+        return([self.matricule, self.nom, self.prenom, self.mot_de_passe, self.adresse_mail, self.telephone])
+
+class CompteAdmin(models.Model):
+    nom = models.fields.CharField(max_length = 100)
+    prenom = models.fields.CharField(max_length= 100)
+    mot_de_passe = models.fields.CharField()
+    adresse_mail = models.fields.EmailField()
+    telephone = models.fields.IntegerField()
+
+class Statut(models.TextChoices):
+    NON_VUE = "NonVue"
+    EN_ATTENTE = "EnAttente"
+    ACCEPTE = "Accepte"
+    REFUSE = "Refuse"
+    DOCUMENT_MAQUANT = "DocumentManquant"
+
+class Besoin(models.Model):
+    typeDeBesoin = models.fields.CharField(max_length = 100) #si ça se trouve tu dois choisir parmi une liste
+    description = models.fields.CharField(max_length = 1000)
+    participants = models.ManyToManyField(CompteEtudiant)
+    statut = models.fields.CharField(max_length = 16, choices = Statut.choices, default = "NonVue")
 
 class projet(models.Model):
     nom_projet= models.fields.CharField(max_length=100)
@@ -31,3 +40,4 @@ class projet(models.Model):
     #puis que le formulaire soit dynamique, donc que tu puisse ajouter ou enlever des participant selon ce que t'ai besoin.
     #Je vais le faire après, j'ai chercher, j'ai eu la flemme de chercher a l'implementer pour l'instant.
     file_path = models.FileField(upload_to="files/", null = False,verbose_name="")
+    statut = models.fields.CharField(max_length = 16, choices = Statut.choices, default = "NonVue")

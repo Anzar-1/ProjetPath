@@ -2,11 +2,7 @@
 {% block content %}
 
     <h2>Soumettez votre projet:</h2>
-<<<<<<< HEAD
     <form enctype="multipart/form-data" action="" method = "POST">
-=======
-    <form action="" method = "POST">
->>>>>>> 722ffde8fe751ef6ad6f4478fa46d35e5a0d0d31
         {%csrf_token%}
         {{form.as_p}}
         <input type="submit" value = "envoyer"/>
